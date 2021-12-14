@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 class="head">welcome class</h1>
+
+    <h1 class="head">welcome back to class</h1>
+
+    <p id="para">my first class</p>
+    <p id="para1">my first class</p>
+
+    <p id="para2">my first class</p>
+
+    <p id="para3">my first class</p>
+
+    <div class="mydiv">
+
+    </div>
+
+
+    <button>click me</button>
+
+    <form action="">
+        <input type="text" placeholder="name" id="username">
+        <input type="email" name="email" id="email" placeholder="email">
+        <input type="password" name="password" id="password" placeholder="password">
+        <input type="submit" value="submit" id="submit">
+
+        
+    </form>
+
+    <p id="welcome"></p>
+
+
+
+    <script>
+
+
+// 1. Given a string of characters as input, 
+//write a function that returns it with the characters reversed.
+//e.g "hello world" => "dlrow olleh"
+
+//SOLUTION
+const reverseString = (str) => {
+  let arr = str.split('')
+  let reverse = arr.reverse().join('')
+  return reverse; 
+ }
+
+ console.log(reverseString('hello world'));
+
+
+// 2. A palindrome is a word or phrase that reads the same backward as forward. 
+// Write a function that checks for this. 
+// the function should return true if a word is a palindrome and false otherwise. 
+// e.g "Racecar" => true, "sit ad est love" => false
+
+//SOLUTION
+
+function palidrome(str){
+const myStr = str
+.toLowerCase()
+.match(/[a-z0-9]/g)
+   
+return myStr.join('') === myStr.reverse().join('')
+   
+ }
+
+ console.log(palidrome('racecar'));
+
+
+
+//  3. Given a string of characters, write a function that returns the 
+//      character that appears the most often.
+//      e,g "Hello World!" => "l"
+
+//SOLUTION
+
+function multipleChar(str){
+    let max = 0;
+    let mulChar = '';
+    str.split('').forEach(function(char){
+        if(str.split(char).length > max){
+            max = str.split(char).length;
+            mulChar = char;
+        }
+    });
+    return mulChar;
+}
+
+console.log(multipleChar('hello wolrd'));
+
+
+
+// 4. write a function that checks the number of consonants and vowels in a given string. 
+// if number of consonants is greater than the number of vowels return "consonants win", 
+// if number of vowels is greater than the number of consonants return "vowels win", 
+// if the number of consonants and vowels are the same, return "draw"
+//SOLUTION
+
+
+//SOLUTION
+function vowelConsonantBattle(str){
+    str = str.toLowerCase();
+    let arrOfVowels = 'aeiou'.split('');
+    let arrOfConsonants = 'bdcfghjklmnpqrstvwxyz'.split('');
+    let vowelCount = 0, consonantCount = 0;
+    for(let i = 0; i < str.length; i++){
+        if(arrOfVowels.indexOf(str[i]) > -1){
+            vowelCount++;
+        } 
+        else if(arrOfConsonants.indexOf(str[i]) > -1){
+            consonantCount++;
+        }
+    }
+
+    if(vowelCount > consonantCount){
+        return 'vowel win!';
+    }else if(consonantCount > vowelCount){
+        return 'consonant wins!';
+    } else if(vowelCount === consonantCount){
+        return 'draw';
+    }
+
+}
+
+
+console.log(vowelConsonantBattle('hello world'));
+
+// for vowels
+function getCount(str){
+    let vowelsCount = 0;
+    const vowels = ['a', 'e', 'i', 'o', 'u'];
+    for(let char of str){
+        if(vowels.includes(char)){
+            vowelsCount++;
+        }
+    }
+
+    return 'total vowels is ' + '' + vowelsCount;
+
+}
+
+console.log(getCount('abracadabra'));
+
+
+function vowelCount(arr1){
+    return arr1.replace(/[^aeiou]/gi, '').length
+}
+
+function consonantCount(arr1){
+    return arr1.replace(/[\s*aeiou]/gi, '').length
+}
+
+function countCheck(arr1){
+    let x = vowelCount(arr1)
+    let y = consonantCount(arr1)
+    let z = ''
+
+    if(y>x){
+        z = 'consonants win'
+    } else if(x>y){
+        z = 'vowel win'
+    } else {
+        z = 'draw'
+    }
+    return z;
+}
+
+console.log(countCheck('abracadabra'));
+
+
+//vowels and consonant 
+function vowCon(str){
+// const str = "The quick brown fox jumps over a lazy dog"; 
+const vowels = str.match(/[aeiou]/gi); 
+const consonants = str.match(/[^aeiou]/gi);   
+vowels.concat([''],consonants).forEach(k => { console.log(k); } );
+}
+
+console.log(vowCon('abracadabra'));
+
+
+5.  Implement the function encode(plainText) which returns an encoded message.
+ It receives a plainText string parameter, for example aaaabcccaaa.
+ You must encode it by counting each consecutive sequence of a letter. e.g. in aaaabcccaaa, 
+ there are:4 times the letter then 1 b then 3 c then 3 aTherefore you must return the string 4a1b3c3a.
+ Constraints :plainText is made of lowercase letters: a-z
+ plainText is never null and has a maximum length of 15000 characters
+ EXAMPLES:PlainText aabaa EncodedText 2a1b2a PlainText aaaabcccaaa 4a1b3c3a 
+
+//SOLUTION
+
+ function letterCount(str){
+    var s= str.match(/([a-zA-Z])\1*/g)||[];
+    return s.map(function(itm){
+        return [itm.charAt(0), itm.length];
+    });
+}
+letterCount('aaaabcccaaa')
+
+// Algorithm Assignment
+
+// Implement a function, findProduct(), that takes an array of integers, 
+// replaces each element of the array with the product of the other elements. 
+
+// let array = [ 1, 2, 3, 4 ] => [24, 12, 8, 6]
+// Let array1 = [0,1,2,3,4] => [24, 0, 0, 0]
+
+//SOLUTION
+
+function findProduct(input){
+  let res = [];
+  let totalProduct = 1;
+  //calculate the total product
+  for(let i = 0; i < input.length; i++){
+    totalProduct = totalProduct * input[i];
+  }
+  //populate the result array by "dividing" each value
+  for(let i = 0; i < input.length; i++){
+    let timesSubstracted = 0;
+    let divisor = input[i];
+    let dividend = totalProduct;
+    while(divisor <= dividend){
+      dividend = dividend - divisor;
+      timesSubstracted++;
+    }
+    res.push(timesSubstracted);
+  }
+  return res;
+}
+
+console.log(findProduct([1,2,3,4]));
+
+// Write a function that merges elements of at most two arrays and 
+// returns an array of the merged elements in sorted order.
+
+// E.g. given, let array1 = [1, 2, 4, 5, 10, 6, 3 ] and let array2 = [0, 8, 19, 90, 11, 16, 13 ]
+// Should return => [0,1,2,3,4,5,6,8,10,11,13,16,19,90].
+
+//solution
+
+function mergeElements(arr1, arr2){
+
+// let arr1 = [1,2,4,5,10,6,3];
+// let arr2 = [0,8,19,90,11,16,13]
+
+let arr3 = arr1.concat(arr2);
+arr3.sort(function(a,b){return a-b});
+return arr3;
+
+}
+
+console.log(mergeElements([1,2,4,5,10,6,3],[0,8,19,90,11,16,13]));
+
+
+
+
+
+
+
+
+
+
+//   const heading = document.querySelector('.head');
+
+//   const heading_one = document.querySelector('.head-one');
+
+//   const para = document.querySelector('#para');
+
+//   para.textContent = 'i just left class for una';
+
+
+//   console.log(para);
+
+//   console.log(heading_one);
+
+//   console.log(heading);
+
+
+// const mydiv = document.querySelector('.mydiv')
+// const h1 = document.querySelectorAll('.head');
+
+// console.log(h1[0]);
+
+
+// const newElement = document.createElement('p');
+
+// newElement.textContent = 'i am a new heading here';
+// mydiv.appendChild(newElement);
+
+// console.log(mydiv);
+
+
+// const button = document.querySelector('button');
+
+// button.addEventListener('click', ()=>{
+//     // let button1 = button.textContent = 'i am click';
+//     // button1 = e.target.value;
+//     alert('i am here');
+
+
+// });
+
+
+const username = document.querySelector('#username');
+const email = document.querySelector('#email');
+const pass = document.querySelector('#password');
+const btn = document.querySelector('#submit');
+const p = document.querySelector('#welcome');
+
+const formObj = {
+    username: '',
+    email: '',
+    pass: ''
+};
+
+username.addEventListener('input', (e) =>{
+    formObj.username = e.target.value;
+});
+
+
+email.addEventListener('input', (e) =>{
+    formObj.email = e.target.value;
+});
+
+
+pass.addEventListener('input', (e) =>{
+    formObj.pass = e.target.value;
+});
+
+btn.addEventListener('click', (e)=>{
+    e.preventDefault(); //prevent disappering from the console
+   if(!formObj.username){
+       alert('username is not allowed to be empty');
+   } else if(!formObj.email){
+       alert('email is not allowed to be empty');
+   } else if(!formObj.pass){
+       alert('put in your password');
+   } else {
+       p.textContent = `welcome ${formObj.username}, a welcome email has been sent to ${formObj.email}`
+   }
+});
+
+
+
+    </script>
+
+</body>
+</html>
+
+
